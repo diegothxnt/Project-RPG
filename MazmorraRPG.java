@@ -193,6 +193,22 @@ public class MazmorraRPG {
                 }
             }
 
+  if (juegoActivo && piso.numero < 3) {
+                System.out.println("\n ¡Piso completado! Preparándote para el siguiente desafío...");
+                jugador.vida = jugador.vidaMaxima; 
+                TimeUnit.SECONDS.sleep(2);
+            }
+        }
+        
+        
+        if (jugador.estaVivo()) {
+            finalEpico(jugador);
+        } else {
+            System.out.println("\nLa oscuridad consume Eldoria... Game Over.");
+        }
+        
+        scanner.close();
+    }
 
 
 
