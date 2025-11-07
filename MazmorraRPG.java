@@ -108,6 +108,19 @@ public class MazmorraRPG {
             }
         }
     }
+    
+    static class Sala {
+        String descripcion;
+        String evento; 
+        Entidad enemigo;
+        String tesoro;
+        
+        Sala(String desc, String evento) {
+            this.descripcion = desc;
+            this.evento = evento;
+        }
+    }
 
    
+
 
