@@ -210,6 +210,38 @@ public class MazmorraRPG {
         scanner.close();
     }
 
+ void mostrarTitulo() {
+        System.out.println("==================================================");
+        System.out.println("      PROFUNDIDADES OLVIDADAS  ");
+        System.out.println("       Un RPG de Mazmorra Épico");
+        System.out.println("==================================================");
+        System.out.println("       por Diego Rojas y Samer Ghattas  ");
+        System.out.println("==================================================");
+    }
+    
+    Jugador seleccionarClase(Scanner scanner) {
+        System.out.println("\n ELIGE TU DESTINO:");
+        for (int i = 0; i < Clase.values().length; i++) {
+            Clase c = Clase.values()[i];
+            System.out.println((i + 1) + ". " + c.nombre + " - Vida: " + c.vidaMaxima + 
+                             " | Ataque: " + c.ataque + " | Defensa: " + c.defensa);
+            System.out.println("   Arma: " + c.armaInicial);
+        }
+        
+        while (true) {
+            System.out.print("\nElige tu clase (1-3): ");
+            try {
+                int eleccion = Integer.parseInt(scanner.nextLine());
+                if (eleccion >= 1 && eleccion <= 3) {
+                    Clase claseElegida = Clase.values()[eleccion - 1];
+                    System.out.println("\n¡Has elegido ser un " + claseElegida.nombre + "!");
+                    return new Jugador(claseElegida);
+                }
+            } catch (NumberFormatException e) {}
+            System.out.println("¡Elección inválida! Elige 1, 2 o 3.");
+        }
+    }
+    
 
 
 
