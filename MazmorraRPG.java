@@ -46,6 +46,68 @@ public class MazmorraRPG {
             vida = Math.max(0, vida - danio);
         }
     }
-    
+     static class Jugador extends Entidad {
+        Clase clase;
+        int experiencia, experienciaNecesaria;
+        ArrayList<String> inventario;
+        String armaEquipada;
+        int oro;
+        
+        Jugador(Clase clase) {
+            super("Héroe", clase.vidaMaxima, clase.ataque, clase.defensa);
+            this.clase = clase;
+            this.experiencia = 0;
+            this.experienciaNecesaria = 100;
+            this.inventario = new ArrayList<>();
+            this.armaEquipada = clase.armaInicial;
+            this.oro = 50;
+            this.inventario.add(armaEquipada);
+        }
+        
+        @Override
+        int atacar() {
+            int danioBase = super.atacar();
+            
+            if (armaEquipada.contains("Legendaria")) danioBase += 15;
+            else if (armaEquipada.contains("Épica")) danioBase += 10;
+            else if (armaEquipada.contains("Rara")) danioBase += 5;
+            return danioBase;
+        }
+        
+        void ganarExperiencia(int exp) {
+            experiencia += exp;
+            System.out.println("¡Ganaste " + exp + " puntos de experiencia!");
+            
+            while (experiencia >= experienciaNecesaria) {
+                subirNivel();
+            }
+        }
+        
+        void subirNivel() {
+            nivel++;
+            experiencia -= experienciaNecesaria;
+            experienciaNecesaria = (int)(experienciaNecesaria * 1.5);
+            
+            vidaMaxima += 20;
+            vida = vidaMaxima;
+            ataque += 5;
+            defensa += 2;
+            
+            System.out.println("\n¡ SUBISTE AL NIVEL " + nivel + "!");
+            System.out.println("Vida: " + vidaMaxima + " | Ataque: " + ataque + " | Defensa: " + defensa);
+        }
+        
+        void usarPocion() {
+            if (inventario.contains("Poción de Vida")) {
+                int curacion = vidaMaxima / 2;
+                vida = Math.min(vidaMaxima, vida + curacion);
+                inventario.remove("Poción de Vida");
+                System.out.println("¡Usaste una poción! Vida recuperada: +" + curacion);
+            } else {
+                System.out.println("No tienes pociones...");
+            }
+        }
+    }
 
    
+
