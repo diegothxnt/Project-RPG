@@ -265,6 +265,68 @@ public class MazmorraRPG {
         return mazmorra;
     }
 
+ Sala crearSalaAleatoria(int dificultad) {
+        String[] descripciones = {
+            "Una sala circular con extraños grabados en las paredes...",
+            "Un pasillo estrecho iluminado por antorchas azules...",
+            "Una cámara amplia con columnas derruidas...",
+            "Un puente sobre un abismo sin fondo...",
+            "Un jardín subterráneo con plantas bioluminiscentes..."
+        };
+        
+        String[] eventos = {"enemigo", "tesoro", "mercenario"};
+        String evento = eventos[(int)(Math.random() * eventos.length)];
+        
+        Sala sala = new Sala(descripciones[(int)(Math.random() * descripciones.length)], evento);
+        
+        if (evento.equals("enemigo")) {
+            Entidad[] grupoEnemigos;
+            if (dificultad == 1) grupoEnemigos = enemigosFaciles;
+            else if (dificultad == 2) grupoEnemigos = enemigosMedios;
+            else grupoEnemigos = enemigosDificiles;
+            
+            sala.enemigo = new Entidad(
+                grupoEnemigos[(int)(Math.random() * grupoEnemigos.length)].nombre,
+                grupoEnemigos[(int)(Math.random() * grupoEnemigos.length)].vidaMaxima,
+                grupoEnemigos[(int)(Math.random() * grupoEnemigos.length)].ataque,
+                grupoEnemigos[(int)(Math.random() * grupoEnemigos.length)].defensa
+            );
+        }
+        
+        return sala;
+    }
+    
+    boolean explorarSala(Scanner scanner, Jugador jugador, Sala sala, int numeroSala) throws InterruptedException {
+        System.out.println("\n--- Sala " + numeroSala + " ---");
+        System.out.println(sala.descripcion);
+        TimeUnit.SECONDS.sleep(1);
+        
+        switch (sala.evento) {
+            case "enemigo":
+                return combate(scanner, jugador, sala.enemigo);
+                
+            case "tesoro":
+                encontrarTesoro(jugador);
+                break;
+                
+            case "mercenario":
+                encontrarMercenario(scanner, jugador);
+                break;
+                
+            case "jefe":
+                Entidad jefePiso = new Entidad("Guardián Antiguo", 80, 25, 10);
+                System.out.println("¡Un GUARDIÁN ANTIGUO bloquea el paso!");
+                return combate(scanner, jugador, jefePiso);
+                
+            case "jefe_final":
+                System.out.println("¡EL REY DEMONIO MALAKAR TE AGUARDA!");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println("Malakar: '¡Insignificante mortal! ¡Tu viaje termina aquí!'");
+                return combateFinal(scanner, jugador);
+        }
+        
+        return true;
+    }
 
 
 
