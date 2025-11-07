@@ -121,6 +121,18 @@ public class MazmorraRPG {
         }
     }
 
+    static class Piso {
+        int numero;
+        ArrayList<Sala> salas;
+        String tema;
+        
+        Piso(int numero, String tema) {
+            this.numero = numero;
+            this.tema = tema;
+            this.salas = new ArrayList<>();
+        }
+    }
    
+
 
 
