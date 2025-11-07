@@ -132,7 +132,28 @@ public class MazmorraRPG {
             this.salas = new ArrayList<>();
         }
     }
+    static Entidad[] enemigosFaciles = {
+        new Entidad("Goblin Gruñón", 40, 12, 3),
+        new Entidad("Rata Gigante", 35, 10, 2),
+        new Entidad("Esqueleto Tambaleante", 45, 14, 4)
+    };
+    
+    static Entidad[] enemigosMedios = {
+        new Entidad("Orco Bárbaro", 70, 20, 8),
+        new Entidad("Araña Venenosa", 60, 18, 6),
+        new Entidad("Mago Oscuro", 55, 25, 5)
+    };
+    
+    static Entidad[] enemigosDificiles = {
+        new Entidad("Minotauro", 100, 30, 12),
+        new Entidad("Dragón Pequeño", 120, 35, 15),
+        new Entidad("Caballero No-Muerto", 90, 28, 18)
+    };
+    
+    static Entidad jefeFinal = new Entidad("REY DEMONIO MALAKAR", 200, 40, 20);
+    
    
+
 
 
 
