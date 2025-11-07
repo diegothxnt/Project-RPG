@@ -22,5 +22,30 @@ public class MazmorraRPG {
             this.armaInicial = arma;
         }
     }
+   
+    static class Entidad {
+        String nombre;
+        int vida, vidaMaxima, ataque, defensa, nivel;
+        
+        Entidad(String nombre, int vida, int ataque, int defensa) {
+            this.nombre = nombre;
+            this.vida = this.vidaMaxima = vida;
+            this.ataque = ataque;
+            this.defensa = defensa;
+            this.nivel = 1;
+        }
+        
+        boolean estaVivo() { return vida > 0; }
+        
+        int atacar() {
+            return (int)(ataque * (0.8 + Math.random() * 0.4));
+        }
+        
+        void recibirDanio(int danio) {
+            danio = Math.max(1, danio - defensa);
+            vida = Math.max(0, vida - danio);
+        }
+    }
     
+
    
