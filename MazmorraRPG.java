@@ -152,7 +152,47 @@ public class MazmorraRPG {
     
     static Entidad jefeFinal = new Entidad("REY DEMONIO MALAKAR", 200, 40, 20);
     
-   
+       public static void main(String[] args) throws InterruptedException {
+        new MazmorraRPG().iniciarJuego();
+    }
+    
+    void iniciarJuego() throws InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        
+        
+        mostrarTitulo();
+        TimeUnit.SECONDS.sleep(2);
+        
+        System.out.println("\n NARRACIÓN: En el reino de Eldoria, una oscuridad antigua despierta...");
+        System.out.println("Las mazmorras prohibidas han abierto sus puertas, y solo un héroe puede detenerlo.");
+        TimeUnit.SECONDS.sleep(3);
+        
+        
+        Jugador jugador = seleccionarClase(scanner);
+        
+        ArrayList<Piso> mazmorra = crearMazmorra();
+        
+        System.out.println("\n Te adentras en las Profundidades Olvidadas...");
+        TimeUnit.SECONDS.sleep(2);
+        
+        boolean juegoActivo = true;
+        for (Piso piso : mazmorra) {
+            if (!juegoActivo) break;
+            
+            System.out.println("\n===  PISO " + piso.numero + ": " + piso.tema + " ===");
+            TimeUnit.SECONDS.sleep(1);
+            
+            for (int i = 0; i < piso.salas.size() && juegoActivo; i++) {
+                Sala sala = piso.salas.get(i);
+                juegoActivo = explorarSala(scanner, jugador, sala, i + 1);
+                
+                if (!jugador.estaVivo()) {
+                    System.out.println("\n HAS CAÍDO EN BATALLA...");
+                    juegoActivo = false;
+                    break;
+                }
+            }
+
 
 
 
