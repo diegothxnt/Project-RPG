@@ -241,7 +241,30 @@ public class MazmorraRPG {
             System.out.println("¡Elección inválida! Elige 1, 2 o 3.");
         }
     }
-    
+    ArrayList<Piso> crearMazmorra() {
+        ArrayList<Piso> mazmorra = new ArrayList<>();
+        
+        Piso piso1 = new Piso(1, "Criptas Olvidadas");
+        piso1.salas.add(crearSalaAleatoria(1));
+        piso1.salas.add(crearSalaAleatoria(1));
+        piso1.salas.add(new Sala("Sala del Guardián Antiguo", "jefe"));
+        mazmorra.add(piso1);
+        
+        Piso piso2 = new Piso(2, "Cavernas Cristalinas");
+        piso2.salas.add(crearSalaAleatoria(2));
+        piso2.salas.add(crearSalaAleatoria(2));
+        piso2.salas.add(new Sala("Santuario del Cristal", "tesoro"));
+        mazmorra.add(piso2);
+        
+        Piso piso3 = new Piso(3, "Trono del Demonio");
+        piso3.salas.add(crearSalaAleatoria(3));
+        piso3.salas.add(crearSalaAleatoria(3));
+        piso3.salas.add(new Sala("Salón del Trono Maldito", "jefe_final"));
+        mazmorra.add(piso3);
+        
+        return mazmorra;
+    }
+
 
 
 
